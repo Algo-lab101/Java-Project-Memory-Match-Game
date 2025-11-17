@@ -1,0 +1,21 @@
+# Compiled classes
+out/
+*.class
+
+# Sound cache directory
+sounds_cache/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+

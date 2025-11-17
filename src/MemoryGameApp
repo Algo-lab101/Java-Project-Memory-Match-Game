@@ -1,0 +1,40 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class MemoryGameApp extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        Label title = new Label("🧠 Memory Match Game");
+        title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setStyle("-fx-alignment: center;");
+
+        GameController controller = new GameController(grid);
+
+        VBox root = new VBox(20, title, grid);
+        root.setStyle("-fx-padding: 20; -fx-alignment: center;");
+
+        Scene scene = new Scene(root, 600, 600);
+        stage.setScene(scene);
+        stage.setTitle("Memory Match Game");
+        stage.show();
+
+        // On close, save score
+        stage.setOnCloseRequest(e -> {
+            DatabaseHelper.saveScore("Player1", controller.getScore());
+            System.out.println("✅ Game Over! Score saved to database.");
+        });
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
